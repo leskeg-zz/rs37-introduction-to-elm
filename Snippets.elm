@@ -72,8 +72,8 @@ type alias Task = { task : String, complete : Bool, taskId: TaskId }
 buy : Task
 buy =  { task = "Buy", complete = True, taskId = 0 }
 
-conquerTheWorld : Task
-conquerTheWorld = Task "Conquer the world" False 2
+buy : Task
+buy = Task "Buy" True 0
 
 -- Union Types
 type Visibility = All | Active | Completed
@@ -132,7 +132,7 @@ But it is:
 result : String
 result =
   case (foo 11) of
-    Just s -> "Result: " ++ s
+    Just s -> s
     Nothing -> "No result"
 
 String.toUpper result
@@ -150,13 +150,7 @@ import MyModule exposing (foo, bar)
 -- Command
 getRandomGif : String -> Cmd Msg
 getRandomGif topic =
-    let
-        url =
-            "https://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC&tag=" ++ topic
-    in
-        Http.send NewGif (Http.get url decodeGifUrl)
-
-
-decodeGifUrl : Decode.Decoder String
-decodeGifUrl =
-    Decode.at [ "data", "image_url" ] Decode.string
+   let
+       url = "someEndpoint/" ++ topic
+   in
+       Http.send NewGif (Http.get url decodeGifUrl)
